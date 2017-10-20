@@ -437,13 +437,10 @@ class PlanningGraph():
         :param node_a2: PgNode_a
         :return: bool
         """
-        # for mut in node_a1.mutex:
-        #     print(mut.action)
-        #     if mut.action in node_a2.action.precond_pos:
-        #         return True
-        # for mut.action in node_a2.mutex:
-        #     if mut.action in node_a1.action.precond_pos:
-        #         return True
+        for node1 in node_a1.parents:
+            for node2 in node_a2.parents:
+                if node1.is_mutex(node2):
+                    return True
         return False
 
     def update_s_mutex(self, nodeset: set):
